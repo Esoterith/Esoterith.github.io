@@ -1,65 +1,78 @@
 <head>
     <title>Vespei's Key Generator</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <style>
+        ::-webkit-scrollbar {
+            width: 10px;
+            background: #1b2838;
+        }
+
+            
+        ::-webkit-scrollbar-thumb {
+            background: #66c0f4;
+            border-radius: 0px !important;
+        }
         body {
-            text-align: center;
-            background: #171a21;
-            }
+        text-align: center;
+        background: #171a21;
+        }
 
-            .wrapper {
-            padding-top:60px;
-            }
+        .wrapper {
+        padding-top:60px;
+        }
 
-            button.form-control {
-            background: #2a475e none repeat scroll 0 0;
-            border-color: #1b2838;
-            box-shadow: 0 1px 0 #1b2838;
-            color: #66c0f4;
-            vertical-align: top;
-            border-radius: 3px;
-            border-style: solid;
-            border-width: 1px;
-            box-sizing: border-box;
-            cursor: pointer;
-            display: inline-block;
-            font-size: 13px;
-            height: 28px;
-            line-height: 26px;
-            margin: 0;
-            padding: 0 10px 1px;
-            text-decoration: none;
-            white-space: nowrap;
-            }
+        button.form-control {
+        background: #2a475e none repeat scroll 0 0;
+        border-color: #1b2838;
+        box-shadow: 0 1px 0 #1b2838;
+        color: #66c0f4;
+        vertical-align: top;
+        border-radius: 3px;
+        border-style: solid;
+        border-width: 1px;
+        box-sizing: border-box;
+        cursor: pointer;
+        display: inline-block;
+        font-size: 13px;
+        height: 28px;
+        line-height: 26px;
+        margin: 0;
+        padding: 0 10px 1px;
+        text-decoration: none;
+        white-space: nowrap;
+        }
 
-            .form-control {
-            background-color: #2a475e;
-            border: 1px solid #1b2838;
-            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07) inset;
-            color: #66c0f4;
-            outline: 0 none;
-            transition: border-color 50ms ease-in-out 0s;
-            margin: 1px;
-            padding: 3px 5px;
-            border-radius: 0;
-            font-size: 14px;
-            font-family: inherit;
-            font-weight: inherit;
-            box-sizing: border-box;
-            font-family: "Open Sans",sans-serif;
-            line-height: 1.4em;
-            width: 310px;
-            }
+        .form-control {
+        background-color: #2a475e;
+        border: 1px solid #1b2838;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.07) inset;
+        color: #66c0f4;
+        outline: 0 none;
+        transition: border-color 50ms ease-in-out 0s;
+        margin: 1px;
+        padding: 3px 5px;
+        border-radius: 0;
+        font-size: 14px;
+        font-family: inherit;
+        font-weight: inherit;
+        box-sizing: border-box;
+        font-family: "Open Sans",sans-serif;
+        line-height: 1.4em;
+        width: 310px;
+        }
 
-            textarea {
-            overflow: hidden;
-            width: 200px;
-            height: 95px !important;
-            text-align: center;
-            border: none !important;
-            resize: none !important;
-            background: #1b2838 !important;
-            color: #66c0f4;
-            }
+        textarea {
+        overflow: scroll;
+        overflow-y:auto;
+        overflow-x:hidden;
+        width: 200px;
+        height: 95px !important;
+        text-align: center;
+        border: none !important;
+        resize: none !important;
+        background: #1b2838 !important;
+        color: #66c0f4;
+        }
     </style>
 </head>
 <script>
@@ -86,7 +99,12 @@
 
     function steamKey()
     {
-        document.getElementById("apikey").value = generateKey().toUpperCase() + "\n" +  generateKey().toUpperCase() + "\n" +  generateKey().toUpperCase() + "\n" +  generateKey().toUpperCase() + "\n" +  generateKey().toUpperCase() + "\n" +  generateKey().toUpperCase();
+        var i;
+        var raw = "";
+        for (i = 0; i < document.getElementById("total").value; i++) {
+            raw = raw + generateKey().toUpperCase() + "\n"
+        }
+        document.getElementById("apikey").value = raw;
         if (ran == false) {
             var music = document.getElementById("keygenMusic")
             music.play();
@@ -103,7 +121,7 @@
       <option>S&Box</option>
       <option>Half-Life: 3</option>
       <option>Among Us 2</option>
-    </select><input class="form-control" type="number" value="5" style="width: 106px !important;" disabled/>
+    </select><input class="form-control" type="number" id="total" value="5" style="width: 106px !important;"/>
     <br/>
     <button class="form-control" id="keygen" onclick="steamKey()">Generate Key(s)</button>
     <iframe src="silent.mp3" allow="autoplay" id="audio" style="display: none"></iframe>
